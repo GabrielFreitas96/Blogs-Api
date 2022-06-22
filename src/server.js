@@ -1,5 +1,6 @@
 require('dotenv').config();
 const app = require('./api');
+const routerCategories = require('./routers/routerCategories');
 const routerLogin = require('./routers/routerLogin');
 const routerUser = require('./routers/routerUser');
 
@@ -15,5 +16,6 @@ app.get('/teste', (req, res) => {
 });
 app.use('/login', routerLogin);
 app.use('/user', routerUser);
+app.use('/categories', routerCategories);
 
 app.listen(port, () => console.log('ouvindo porta', port));
