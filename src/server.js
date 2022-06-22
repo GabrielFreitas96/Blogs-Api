@@ -2,6 +2,7 @@ require('dotenv').config();
 const app = require('./api');
 const routerCategories = require('./routers/routerCategories');
 const routerLogin = require('./routers/routerLogin');
+const routerPost = require('./routers/routerPost');
 const routerUser = require('./routers/routerUser');
 
 // não remova a variável `API_PORT` ou o `listen`
@@ -17,5 +18,6 @@ app.get('/teste', (req, res) => {
 app.use('/login', routerLogin);
 app.use('/user', routerUser);
 app.use('/categories', routerCategories);
+app.use('/post', routerPost);
 
 app.listen(port, () => console.log('ouvindo porta', port));
