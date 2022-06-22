@@ -36,5 +36,13 @@ const getById = async (id) => {
   return user;
 };
 
-const userService = { getUserByEmail, getAll, addUser, getEmail, getById };
+const getEmailById = async (email) => {
+  const user = await User.findOne({ where: { email } });
+  if (user) {
+    return user.id;
+  }
+  return user;
+};
+
+const userService = { getUserByEmail, getAll, addUser, getEmail, getById, getEmailById };
 module.exports = userService;
