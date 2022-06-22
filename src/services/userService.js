@@ -30,5 +30,11 @@ const addUser = async (displayName, email, password, image) => {
   return token;
 };
 
-const userService = { getUserByEmail, getAll, addUser, getEmail };
+const getById = async (id) => {
+  const user = await User.findByPk(id, { attributes: { exclude: ['password'] } });
+  console.log('user no service', user);
+  return user;
+};
+
+const userService = { getUserByEmail, getAll, addUser, getEmail, getById };
 module.exports = userService;
