@@ -6,5 +6,6 @@ const verifyNewCategory = require('../middlewares/verifyNewCategory');
 const routerCategories = express.Router();
 routerCategories.post('/', verifyAuthentication,
 verifyNewCategory, categoriesController.addCategory);
+routerCategories.get('/', verifyAuthentication, categoriesController.getAll);
 
 module.exports = routerCategories;
