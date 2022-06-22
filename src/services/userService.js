@@ -19,7 +19,7 @@ const getEmail = async (email) => {
 };
 
 const getAll = async () => {
-  const users = await User.findAll();
+  const users = await User.findAll({ attributes: { exclude: ['password'] } });
   return users;
 };
 const addUser = async (displayName, email, password, image) => {
