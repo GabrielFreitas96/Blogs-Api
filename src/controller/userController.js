@@ -8,13 +8,13 @@ const getAll = async (req, res) => {
 
 const addUser = async (req, res) => {
   const { displayName, email, password, image } = req.body;
-  const emailBD = await userService.getUserByEmail(email);
-  console.log('emailBD no userController', emailBD);
+  const emailBD = await userService.getEmail(email);
+  // console.log('emailBD no userController', emailBD);
   if (emailBD) {
     return res.status(409).json({ message: 'User already registered' });
   }
   const response = await userService.addUser(displayName, email, password, image);
-  res.status(201).json(response);
+  res.status(201).json({ token: response });
 };
 
 const userController = { getAll, addUser };
