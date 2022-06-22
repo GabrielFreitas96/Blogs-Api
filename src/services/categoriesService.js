@@ -11,5 +11,10 @@ const addCategory = async (name) => {
   return category;
 };
 
-const categoriesService = { addCategory, getAll };
+const getById = async (id) => {
+  const category = await Category.findByPk(id);
+  return category;
+};
+
+const categoriesService = { addCategory, getAll, getById };
 module.exports = categoriesService;
