@@ -1,4 +1,4 @@
-const { BlogPost } = require('../database/models');
+const { BlogPost, User, Category } = require('../database/models');
 const decodeEmail = require('../helpers/decodeEmail');
 const categoriesService = require('./categoriesService');
 const userService = require('./userService');
@@ -22,6 +22,22 @@ const addPost = async (token, title, content, categoryIds) => {
   .create({ title, content, userId, published: new Date(), updated: new Date() });
   return postAdded;
   };
-
-const postService = { addPost };
+const getAll = async () => {
+  const posts = await BlogPost.findAll({
+    include: [{
+      model: User,
+      as: 'user',
+      attributes: { exclude: ['password'] }, 
+    },
+    {
+      model: Category,
+      as: 'categories',
+      through: { attributes: [] }, 
+    },
+  ],
+  });
+  console.log('posts no service', posts);
+  return posts;
+};
+const postService = { addPost, getAll };
 module.exports = postService;
