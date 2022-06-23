@@ -29,5 +29,13 @@ if (!postFind) {
 res.status(200).json(postFind);
 };
 
-const postController = { addPost, getAll, getById };
+const editPost = async (req, res) => {
+ const { id } = req.params;
+ const { title, content } = req.body;
+ await postService.editPost(id, title, content);
+ const response = await postService.getById(+id);
+ res.status(200).json(response);
+};
+
+const postController = { addPost, getAll, getById, editPost };
 module.exports = postController;
