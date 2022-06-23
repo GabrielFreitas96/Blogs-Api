@@ -39,5 +39,22 @@ const getAll = async () => {
   console.log('posts no service', posts);
   return posts;
 };
-const postService = { addPost, getAll };
+const getById = async (id) => {
+  const postId = await BlogPost.findByPk(id, {
+    include: [{
+      model: User,
+      as: 'user',
+      attributes: { exclude: ['password'] }, 
+    },
+    {
+      model: Category,
+      as: 'categories',
+      through: { attributes: [] }, 
+    },
+  ],
+  });
+  console.log('postId no service', postId);
+  return postId;
+};
+const postService = { addPost, getAll, getById };
 module.exports = postService;
