@@ -43,5 +43,19 @@ await postService.deletePost(+id);
 res.status(204).json();
 };
 
-const postController = { addPost, getAll, getById, editPost, deletePost };
+const searchByQuery = async (req, res) => {
+  const { q } = req.query;
+  console.log('q no controller', q);
+  if (q === '') {
+    const response = await postService.getAll();
+    return res.status(200).json(response);
+  }
+  const response = await postService.getBySearch(q);
+  if (!response) {
+    return res.status(200).json([]);
+  }
+  res.status(200).json([response]);
+};
+
+const postController = { addPost, getAll, getById, editPost, deletePost, searchByQuery };
 module.exports = postController;
