@@ -26,6 +26,12 @@ const getById = async (req, res) => {
   res.status(200).json(response);
 };
 
-const userController = { getAll, addUser, getById };
+const deleteUser = async (req, res) => {
+  const token = req.headers.authorization;
+  await userService.deleteUser(token);
+  res.status(204).json();
+};
+
+const userController = { getAll, addUser, getById, deleteUser };
 
 module.exports = userController;
