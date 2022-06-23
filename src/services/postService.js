@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const { BlogPost, User, Category } = require('../database/models');
 const decodeEmail = require('../helpers/decodeEmail');
 const categoriesService = require('./categoriesService');
@@ -66,5 +67,25 @@ const deletePost = async (id) => {
   await BlogPost.destroy({ where: { id } });
 };
 
-const postService = { addPost, getAll, getById, editPost, deletePost };
+const getBySearch = async (q) => {
+  const post = await BlogPost.findOne({
+    include: [{
+      model: User,
+      as: 'user',
+      attributes: { exclude: ['password'] }, 
+    }, {
+      model: Category,
+      as: 'categories',
+      through: { attributes: [] }, 
+    }],
+   where: { [Op.or]: [
+      { title: { [Op.like]: `%%${q}%%` } },
+      { content: { [Op.like]: `%%${q}%%` } },
+    ],
+  } });
+  console.log('post no service', post);
+  return post;
+};
+
+const postService = { addPost, getAll, getById, editPost, deletePost, getBySearch };
 module.exports = postService;
