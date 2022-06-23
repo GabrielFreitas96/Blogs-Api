@@ -8,6 +8,7 @@ const verifyUserDeletePost = require('../middlewares/verifyUserDeletePost');
 
 const routerPost = express.Router();
 routerPost.post('/', verifyAuthentication, verifyNewPost, postController.addPost);
+routerPost.get('/search', verifyAuthentication, postController.searchByQuery);
 routerPost.get('/:id', verifyAuthentication, postController.getById);
 routerPost.get('/', verifyAuthentication, postController.getAll);
 routerPost.put('/:id', verifyAuthentication, verifyEditPost,
