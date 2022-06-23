@@ -5,4 +5,5 @@ const verifyNewPost = require('../middlewares/verifyNewPost');
 
 const routerPost = express.Router();
 routerPost.post('/', verifyAuthentication, verifyNewPost, postController.addPost);
+routerPost.get('/', verifyAuthentication, postController.getAll);
 module.exports = routerPost;
