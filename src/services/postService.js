@@ -56,5 +56,11 @@ const getById = async (id) => {
   // console.log('postId no service', postId);
   return postId;
 };
-const postService = { addPost, getAll, getById };
+
+const editPost = async (id, title, content) => {
+  await BlogPost.update({ title, content }, { where: { id } });
+// console.log('postEdited no service', postEdited);
+};
+
+const postService = { addPost, getAll, getById, editPost };
 module.exports = postService;
