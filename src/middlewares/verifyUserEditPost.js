@@ -6,11 +6,11 @@ const verifyUserEditPost = async (req, res, next) => {
   const { id } = req.params;
   const token = req.headers.authorization;
   const { userId } = await postService.getById(+id);
-  console.log('usuario dono', userId);
+  // console.log('usuario dono', userId);
   const email = decodeEmail(token);
-  console.log('email do usuario logado', email);
+  // console.log('email do usuario logado', email);
   const idUserLoged = await userService.getEmailById(email);
-  console.log('id do usuário logado', idUserLoged);
+  // console.log('id do usuário logado', idUserLoged);
   if (userId !== idUserLoged) {
     return res.status(401).json({ message: 'Unauthorized user' });
   }
