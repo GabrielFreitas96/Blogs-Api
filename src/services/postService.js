@@ -62,5 +62,9 @@ const editPost = async (id, title, content) => {
 // console.log('postEdited no service', postEdited);
 };
 
-const postService = { addPost, getAll, getById, editPost };
+const deletePost = async (id) => {
+  await BlogPost.destroy({ where: { id } });
+};
+
+const postService = { addPost, getAll, getById, editPost, deletePost };
 module.exports = postService;
