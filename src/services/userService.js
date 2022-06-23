@@ -1,5 +1,6 @@
 const { User } = require('../database/models');
 const generateToken = require('../helpers/jwtTokenGenerate');
+const decodeEmail = require('../helpers/decodeEmail');
 
 const getUserByEmail = async (email, password) => {
   const user = await User.findOne({ 
@@ -44,5 +45,18 @@ const getEmailById = async (email) => {
   return user;
 };
 
-const userService = { getUserByEmail, getAll, addUser, getEmail, getById, getEmailById };
+const deleteUser = async (token) => {
+  const email = decodeEmail(token);
+  const id = await getEmailById(email);
+  console.log('id do usuario logado', id);
+  await User.destroy({ where: { id } });
+};
+
+const userService = { getUserByEmail,
+  getAll,
+  addUser,
+  getEmail,
+  getById,
+  getEmailById,
+  deleteUser };
 module.exports = userService;
