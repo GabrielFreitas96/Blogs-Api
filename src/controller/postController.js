@@ -15,5 +15,10 @@ const addPost = async (req, res) => {
 res.status(201).json(response);
 };
 
-const postController = { addPost };
+const getAll = async (req, res) => {
+  const response = await postService.getAll();
+  res.status(200).json(response); 
+};
+
+const postController = { addPost, getAll };
 module.exports = postController;
