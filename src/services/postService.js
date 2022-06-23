@@ -53,7 +53,7 @@ const getById = async (id) => {
     },
   ],
   });
-  console.log('postId no service', postId);
+  // console.log('postId no service', postId);
   return postId;
 };
 const postService = { addPost, getAll, getById };
